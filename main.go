@@ -288,12 +288,14 @@ func setTemperatures(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("MIssing data"))
+		log.Println("Error Temp:", err)
 		return
 	}
 
 	if err = writeTemperature(data); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Fail in writing temperature"))
+		log.Println("Error write Temp:", err)
 		return
 	}
 
